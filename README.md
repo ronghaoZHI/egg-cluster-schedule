@@ -1,5 +1,6 @@
 # example
 
+egg 接入分布式调度任务 demo ，防止集群定时任务执行多次
 
 
 ## QuickStart
