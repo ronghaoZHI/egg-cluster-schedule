@@ -1,6 +1,16 @@
 const Agenda = require('agenda'); // agenda 或者 bull   
 const mongoConnectionString = "mongodb://127.0.0.1/agenda";
-const agenda = new Agenda({ db: { address: mongoConnectionString } })
+let agenda;
+try {
+  agenda = new Agenda({ 
+    db: { address: mongoConnectionString }, 
+    defaultLockLifetime: 10000 
+  });
+  console.log('agenda', agenda)
+} catch (error) {
+  console.log(error)
+}
+
 
 module.exports = (agent) => {
 
@@ -14,18 +24,43 @@ module.exports = (agent) => {
     // { priority: "high", concurrency: 10 },
     async (job) => {
       // const { to } = job.attrs.data;
+      console.log(job.attrs.name);
       // 定义需要执行的 job 
       // 触发 agent 事件
       agent.emit('xx-job') // 对应的需要 agent.on('')
     }
   );
 
+  agenda.on("start", (job) => {
+    console.log("Job %s starting", job.attrs.name);
+  });
+
   // 配置 job 执行规则
   (async function () {
+    // await agenda.stop();
     await agenda.start();
-    await agenda.every("0 0 8 * * *", "job:send-email-report");
+    await agenda.every("*/5 * * * * *", "job:send-email-report");
+
+
+    // 进程结束时需要停止关闭调度任务
+    async function graceful() {
+      console.log('---- process-exit ---')
+      await agenda.stop();
+      process.exit(0);
+    }
+
+    process.on("SIGTERM", graceful);
+    process.on("SIGINT", graceful);
   })();
 
+  agent.beforeStart(async () => {
+    console.log('agent.beforeStart');
+
+  })
+
+  agent.beforeClose(() => {
+    console.log('agent.beforeClose');
+  })
   class ClusterStrategy extends agent.ScheduleStrategy {
     start() {
       // console.log(this.schedule)
