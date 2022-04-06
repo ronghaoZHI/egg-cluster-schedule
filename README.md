@@ -1,34 +1,42 @@
-# example
+## egg-agenda
 
-egg 接入分布式调度任务 demo ，防止集群定时任务执行多次
-
+egg 定时任务分布式调度插件，防止集群定时任务重复执行多次。
 
 ## QuickStart
 
-<!-- add docs here for user -->
+### 1. 安装
 
-see [egg docs][egg] for more detail.
+`npm i egg-agenda`
 
-### Development
-
-```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
+### 2. 配置
+`/config/config.{default}.js` 
+```js
+config.agenda = {
+  db: {
+    address: 'mongodb://127.0.0.1/test', // 必填项， mongodb 地址
+    collection: 'eggAgendaJobs'
+  },
+  defaultLockLifetime: 60 * 1000,
+}
 ```
 
-### Deploy
+### 改造现有 schedule 
 
-```bash
-$ npm start
-$ npm stop
+`/app/schedule/xxx.js`
+```js
+module.exports = {
+  schedule: {
+    type: 'cluster', // type 改成 cluster 即可, 其他配置保持不变
+    //... 
+  },
+  async task(ctx) {
+    // 执行的任务 ctx.service.xxx()
+    // ...
+  }
+}
+
 ```
 
-### npm scripts
 
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
-
-
+## 
 [egg]: https://eggjs.org

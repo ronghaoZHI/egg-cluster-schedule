@@ -1,5 +1,15 @@
 {
-  "name": "example",
+  "name": "egg-agenda",
+  "eggPlugin": {
+    "name": "agenda",
+    "dependencies": [],
+    "env": [
+      "local",
+      "test",
+      "unittest",
+      "prod"
+    ]
+  },
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -8,10 +18,10 @@
   },
   "dependencies": {
     "agenda": "^4.2.1",
+    "assert": "^2.0.0",
     "egg": "^2.15.1",
-    "egg-redis": "^2.4.0",
     "egg-scripts": "^2.11.0",
-    "node-quartz": "^0.2.3"
+    "humanize-ms": "^1.2.1"
   },
   "devDependencies": {
     "autod": "^3.0.1",
