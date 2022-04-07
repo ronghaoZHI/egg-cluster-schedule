@@ -1,14 +1,7 @@
 {
   "name": "egg-agenda",
   "eggPlugin": {
-    "name": "agenda",
-    "dependencies": [],
-    "env": [
-      "local",
-      "test",
-      "unittest",
-      "prod"
-    ]
+    "name": "agenda"
   },
   "version": "1.0.0",
   "description": "",
@@ -19,11 +12,11 @@
   "dependencies": {
     "agenda": "^4.2.1",
     "assert": "^2.0.0",
-    "egg": "^2.15.1",
-    "egg-scripts": "^2.11.0",
     "humanize-ms": "^1.2.1"
   },
   "devDependencies": {
+    "egg": "^2.15.1",
+    "egg-scripts": "^2.11.0",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
     "egg-bin": "^4.11.0",
