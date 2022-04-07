@@ -1,4 +1,4 @@
-## egg-agenda
+## egg-cluster-schedule
 
 egg 定时任务分布式调度插件，防止集群定时任务重复执行多次。
 
@@ -6,7 +6,7 @@ egg 定时任务分布式调度插件，防止集群定时任务重复执行多�
 
 ### 1. 安装
 
-`npm i egg-agenda`
+`npm i egg-cluster-schedule`
 
 ### 2. 配置 
 `/config/config.{default}.js` 
@@ -14,7 +14,7 @@ egg 定时任务分布式调度插件，防止集群定时任务重复执行多�
 config.agenda = {
   db: {
     address: 'mongodb://127.0.0.1/test', // 必填项， mongodb 地址
-    collection: 'eggAgendaJobs'
+    collection: 'egg-cluster-schedule-jobs'
   },
   defaultLockLifetime: 60 * 1000,
 }
