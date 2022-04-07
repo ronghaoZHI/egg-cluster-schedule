@@ -8,7 +8,7 @@ egg 定时任务分布式调度插件，防止集群定时任务重复执行多�
 
 `npm i egg-agenda`
 
-### 2. 配置
+### 2. 配置 
 `/config/config.{default}.js` 
 ```js
 config.agenda = {
@@ -19,8 +19,15 @@ config.agenda = {
   defaultLockLifetime: 60 * 1000,
 }
 ```
-
-### 改造现有 schedule 
+### 3.启用插件 
+`/config/plugin.js`
+```js
+exports.clusterSchedule = {
+  enable: true,
+  package: 'egg-cluster-schedule',
+};
+```
+### 4.改造现有 schedule 
 
 `/app/schedule/xxx.js`
 ```js
@@ -38,5 +45,6 @@ module.exports = {
 ```
 
 
-## 
-[egg]: https://eggjs.org
+## 更多资料
+[egg 插件开发]: https://www.eggjs.org/zh-CN/advanced/plugin
+[agenda 调度系统]: https://github.com/agenda/agenda
