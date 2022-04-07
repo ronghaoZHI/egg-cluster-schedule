@@ -1,5 +1,5 @@
 {
-  "name": "egg-cluster-schedule",
+  "name": "@zz-nodejs/egg-cluster-schedule",
   "eggPlugin": {
     "name": "clusterSchedule"
   },
